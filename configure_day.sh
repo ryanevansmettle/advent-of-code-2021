@@ -12,16 +12,16 @@ ruby_template=$(cat <<EOF
 
 input = File.read("input.txt").split
 
-def part1 (input, debug)
+def part1 (input)
 
 end
 
-def part2 (input, debug)
+def part2 (input)
 
 end
 
-puts "Part 1: #{part1(input, false)}"
-puts "Part 2: #{part2(input, false)}"
+puts "Part 1: #{part1(input)}"
+puts "Part 2: #{part2(input)}"
 
 EOF
 )
