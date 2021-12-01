@@ -1,0 +1,5 @@
+.idea
+out
+
+**/.dcignore
+**/input_real.txt
