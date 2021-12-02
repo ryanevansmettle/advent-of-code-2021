@@ -1,57 +1,74 @@
 #!/usr/bin/env ruby
 
-def parse_instr(d, n)
-  if d == "forward"
+class Instruction
+  # @return [Symbol]
+  attr_accessor :direction
+  # @return [Numeric]
+  attr_accessor :units
+
+  def initialize(direction, units)
+    @direction = direction
+    @units = units
+  end
+end
+
+# @param [String] instruction
+# @return [Instruction]
+def parse_instruction (instruction)
+  (d, n) = instruction.split(/\s/)
+  case d
+  when "forward"
     dir = :fwd
-  elsif d == "down"
+  when "down"
     dir = :down
   else
     dir = :up
   end
 
-  [dir, n.to_i]
+  Instruction.new(dir, n.to_i)
 end
 
-input = File.read("input.txt").split("\n").map { |l| l.split(" ") }.map { |d, n| parse_instr(d, n) }
+input = File.open("input.txt").each_line
+            .map { |l| parse_instruction(l) }
 
+# @param [Array<Instruction>] input
 def part1 (input)
   depth = 0
-  hor = 0
+  horizontal_position = 0
 
-  input.each { |inst|
-    d = inst[0]
-    n = inst[1]
-    if d == :down
-      depth += n
-    elsif d == :up
-      depth -= n
+  input.each { |instruction|
+    case instruction.direction
+    when :down
+      depth += instruction.units
+    when :up
+      depth -= instruction.units
     else
-      hor += n
+      horizontal_position += instruction.units
     end
   }
 
-  depth * hor
+  depth * horizontal_position
 end
 
+# @param [Array<Instruction>] input
 def part2 (input)
   depth = 0
-  hor = 0
+  horizontal_position = 0
   aim = 0
 
-  input.each { |inst|
-    d = inst[0]
-    n = inst[1]
-    if d == :down
-      aim += n
-    elsif d == :up
-      aim -= n
+  input.each { |instruction|
+    case instruction.direction
+    when :down
+      aim += instruction.units
+    when :up
+      aim -= instruction.units
     else
-      hor += n
-      depth += (aim * n)
+      horizontal_position += instruction.units
+      depth += aim * instruction.units
     end
   }
 
-  depth * hor
+  depth * horizontal_position
 end
 
 puts "Part 1: #{part1(input)}"

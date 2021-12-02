@@ -10,7 +10,7 @@ fi
 ruby_template=$(cat <<EOF
 #!/usr/bin/env ruby
 
-input = File.read("input.txt").split
+input = File.open("input.txt").each_line
 
 def part1 (input)
 
