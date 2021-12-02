@@ -45,6 +45,7 @@ chmod +x "day_${day}.rb"
 touch "input_example.txt"
 touch "input_real.txt"
 ln -sf "input_example.txt" "input.txt"
+touch "README.md"
 
 cd ..
 tree "$day"
