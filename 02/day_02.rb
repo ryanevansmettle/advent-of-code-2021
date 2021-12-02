@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/util'
+
 class Instruction
   # @return [Symbol]
   attr_accessor :direction
@@ -15,7 +17,7 @@ end
 # @param [String] instruction
 # @return [Instruction]
 def parse_instruction (instruction)
-  (d, n) = instruction.split(/\s/)
+  (d, n) = instruction
   case d
   when "forward"
     dir = :fwd
@@ -28,8 +30,8 @@ def parse_instruction (instruction)
   Instruction.new(dir, n.to_i)
 end
 
-input = File.open("input.txt").each_line
-            .map { |l| parse_instruction(l) }
+input = Input.read_lines_and_tokenise
+             .map(&method(:parse_instruction))
 
 # @param [Array<Instruction>] input
 def part1 (input)

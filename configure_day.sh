@@ -10,7 +10,9 @@ fi
 ruby_template=$(cat <<EOF
 #!/usr/bin/env ruby
 
-input = File.open("input.txt").each_line
+require_relative '../lib/util'
+
+input = Input.read_lines_and_tokenise
 
 def part1 (input)
 
