@@ -7,28 +7,42 @@ if [ $# != 1 ]; then
   exit 1
 fi
 
+day="$1"
+
 ruby_template=$(cat <<EOF
 #!/usr/bin/env ruby
 
 require_relative '../lib/util'
 
-input = Input.read_lines_and_tokenise
+class Day${day} < Scenario
 
-def part1 (input)
+  # @param [File] input
+  def grok_input(input)
+    Input.to_lines(input)
+  end
+
+  def part1 (input)
+
+  end
+
+  def part1_expected_result
+    nil
+  end
+
+  def part2 (input)
+
+  end
+
+  def part2_expected_result
+    nil
+  end
 
 end
 
-def part2 (input)
-
-end
-
-puts "Part 1: #{part1(input)}"
-puts "Part 2: #{part2(input)}"
+Day${day}.new
 
 EOF
 )
-
-day="$1"
 
 source_dir="$(dirname "${BASH_SOURCE[0]}")"
 

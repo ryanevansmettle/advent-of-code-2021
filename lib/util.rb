@@ -1,18 +1,21 @@
 module Input
 
+  # @param [String] filename
   # @return [File]
-  def self.read_input
-    File.open("input.txt")
+  def self.read_input(filename)
+    File.open(filename)
   end
 
+  # @param [File] file
   # @return [Array<String>]
-  def self.read_lines
-    return read_input.each_line.map{|l| l.chomp}
+  def self.to_lines(file)
+    return file.each_line.map { |l| l.chomp }
   end
 
+  # @param [File] file
   # @return [Array<Array>]
-  def self.read_lines_and_tokenise
-    return read_input.each_line.map{|l| Grok.tokenise_spaces(l)}
+  def self.read_lines_and_tokenise(file)
+    return file.each_line.map { |l| Grok.tokenise_spaces(l) }
   end
 
 end
@@ -28,6 +31,77 @@ module Grok
   # @param [String] str
   # @return [Array]
   def self.tokenise_spaces(str)
-    return tokenise(str,/\s/)
+    return tokenise(str, /\s/)
   end
 end
+
+class Scenario
+
+  def initialize
+    @part1ExampleFile = "input_example.txt"
+    @part1RealFile = "input_real.txt"
+
+    @part2ExampleFile = "input_example.txt"
+    @part2RealFile = "input_real.txt"
+
+    self.solve
+  end
+
+  def print_example_result(partIdentifier, result, expected_result)
+
+    if result == expected_result
+      puts "[PASS] Part #{partIdentifier} Example: #{expected_result}"
+    else
+      puts "[FAIL] Part #{partIdentifier} Example expected #{expected_result}, was #{result}"
+    end
+  end
+
+  def solve
+    p1ExampleInput = grok_input(Input.read_input(@part1ExampleFile))
+    p2ExampleInput = grok_input(Input.read_input(@part2ExampleFile))
+
+    print_example_result(
+      "1",
+      self.part1(p1ExampleInput),
+      self.part1_expected_result
+    )
+
+    print_example_result(
+      "2",
+      self.part2(p2ExampleInput),
+      self.part2_expected_result
+    )
+
+    puts "\n----------\n\n"
+
+    p1RealInput = grok_input(Input.read_input(@part1RealFile))
+    p2RealInput = grok_input(Input.read_input(@part2RealFile))
+    p1RealResult = self.part1(p1RealInput)
+    p2RealResult = self.part2(p2RealInput)
+
+    puts "Part 1: #{p1RealResult}"
+    puts "Part 2: #{p2RealResult}"
+  end
+
+  def self.grok_input(input)
+    raise NotImplementedError
+  end
+
+  def self.part1_expected_result
+    raise NotImplementedError
+  end
+
+  def self.part2_expected_result
+    raise NotImplementedError
+  end
+
+  def self.part1(input)
+    raise NotImplementedError
+  end
+
+  def self.part2(input)
+    raise NotImplementedError
+  end
+
+end
+
