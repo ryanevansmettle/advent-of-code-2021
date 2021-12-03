@@ -7,7 +7,7 @@ module Input
 
   # @return [Array<String>]
   def self.read_lines
-    return read_input.each_line
+    return read_input.each_line.map{|l| l.chomp}
   end
 
   # @return [Array<Array>]
