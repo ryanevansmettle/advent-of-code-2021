@@ -66,15 +66,17 @@ class Scenario
     p1ExampleInput = grok_input(Input.read_input(@part1ExampleFile))
     p2ExampleInput = grok_input(Input.read_input(@part2ExampleFile))
 
+    part1ExampleResult = self.part1(p1ExampleInput)
     print_example_result(
       "1",
-      self.part1(p1ExampleInput),
+      part1ExampleResult,
       self.part1_expected_result
     )
 
+    part2ExampleResult = self.part2(p2ExampleInput)
     print_example_result(
       "2",
-      self.part2(p2ExampleInput),
+      part2ExampleResult,
       self.part2_expected_result
     )
 
@@ -87,6 +89,10 @@ class Scenario
 
     puts "Part 1: #{p1RealResult}"
     puts "Part 2: #{p2RealResult}"
+
+    if part1ExampleResult != self.part1_expected_result || part2ExampleResult != self.part2_expected_result
+      exit 1
+    end
   end
 
   def self.grok_input(input)
