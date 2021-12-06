@@ -9,39 +9,19 @@ class Day06 < Scenario
     Input.to_lines(input).map { |l| l.split(",").map { |i| i.to_i } }.flatten
   end
 
-  def part1 (input)
-    (1..80).each { |_|
-      additions = []
-      input.each_with_index { |t, i|
-        input[i] -= 1
-        if t == 0
-          input[i] = 6
-          additions << 8
-        end
-      }
-      input = input + additions
-    }
-    input.size
-  end
-
-  def part1_expected_result
-    5934
-  end
-
-  def part2 (input)
-    timers = Hash.new(0)
-
-    input.each { |i|
-      timers[i] += 1
-    }
-
-    (1..256).each { |_|
+  # @param [Hash] population
+  # @param [Numeric] days
+  # @return [Numeric]
+  def simulate_growth(population, days)
+    (1..days).each { |_|
       changes = Hash.new(0)
-      timers.each { |t, v|
+      population.each { |t, v|
         if t == 0
+          # Reset 0 to 6
           changes[6] += v
           changes[t] -= v
 
+          # Spawn new ones
           changes[8] += v
           next
         end
@@ -50,10 +30,30 @@ class Day06 < Scenario
       }
 
       changes.each { |t, v|
-        timers[t] += v
+        population[t] += v
       }
     }
-    timers.values.sum
+    population.values.sum
+  end
+
+  def input_to_population_map(input)
+    population = Hash.new(0)
+    input.each { |i|
+      population[i] += 1
+    }
+    population
+  end
+
+  def part1 (input)
+    simulate_growth(input_to_population_map(input), 80)
+  end
+
+  def part1_expected_result
+    5934
+  end
+
+  def part2 (input)
+    simulate_growth(input_to_population_map(input), 256)
   end
 
   def part2_expected_result
