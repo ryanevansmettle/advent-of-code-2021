@@ -60,6 +60,9 @@ class Scenario
   end
 
   def solve
+    name = self.class.name.gsub(/(?<=[a-z])(?=[0-9])/, ' ')
+    puts "#{name}\n\n"
+
     p1ExampleInput = grok_input(Input.read_input(@part1ExampleFile))
     p2ExampleInput = grok_input(Input.read_input(@part2ExampleFile))
 

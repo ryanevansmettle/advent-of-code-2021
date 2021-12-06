@@ -44,6 +44,16 @@ Day${day}.new
 EOF
 )
 
+watchfile_template=$(cat <<EOF
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+watch --color -d -n2 ./day_${day}.rb
+
+EOF
+)
+
 source_dir="$(dirname "${BASH_SOURCE[0]}")"
 
 cd "$source_dir"
@@ -60,8 +70,9 @@ echo "$ruby_template" > "day_${day}.rb"
 chmod +x "day_${day}.rb"
 touch "input_example.txt"
 touch "input_real.txt"
-ln -sf "input_example.txt" "input.txt"
 touch "README.md"
+echo "$watchfile_template" > "watch.sh"
+chmod +x "watch.sh"
 
 cd ..
 tree "$day"
