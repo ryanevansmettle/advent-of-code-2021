@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Input
 
   # @param [String] filename
@@ -48,11 +50,12 @@ class Scenario
   end
 
   def print_example_result(partIdentifier, result, expected_result)
-
     if result == expected_result
-      puts "[PASS] Part #{partIdentifier} Example: #{expected_result}"
+      pass = "PASS".on_green
+      puts "[#{pass}] Part #{partIdentifier} Example: #{expected_result}"
     else
-      puts "[FAIL] Part #{partIdentifier} Example expected #{expected_result}, was #{result}"
+      fail = "FAIL".on_red
+      puts "[#{fail}] Part #{partIdentifier} Example: expected #{expected_result}, was #{result}"
     end
   end
 
