@@ -25,12 +25,20 @@ class Day${day} < Scenario
 
   end
 
+  def part1_example_expected_result
+    nil
+  end
+
   def part1_expected_result
     nil
   end
 
   def part2 (input)
 
+  end
+
+  def part2_example_expected_result
+    nil
   end
 
   def part2_expected_result

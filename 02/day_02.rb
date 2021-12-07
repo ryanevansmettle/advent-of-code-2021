@@ -63,8 +63,12 @@ class Day02 < Scenario
     depth * horizontal_position
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     150
+  end
+
+  def part1_expected_result
+    2102357
   end
 
   # @param [Array<Instruction>] input
@@ -88,8 +92,12 @@ class Day02 < Scenario
     depth * horizontal_position
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     900
+  end
+
+  def part2_expected_result
+    2101031224
   end
 
 end

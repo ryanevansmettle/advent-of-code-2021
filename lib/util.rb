@@ -40,22 +40,22 @@ end
 class Scenario
 
   def initialize
-    @part1ExampleFile = "input_example.txt"
-    @part1RealFile = "input_real.txt"
+    @part1_example_file = "input_example.txt"
+    @part1_real_file = "input_real.txt"
 
-    @part2ExampleFile = "input_example.txt"
-    @part2RealFile = "input_real.txt"
+    @part2_example_file = "input_example.txt"
+    @part2_real_file = "input_real.txt"
 
     self.solve
   end
 
-  def print_example_result(partIdentifier, result, expected_result)
+  def print_result(part_identifier, result, expected_result)
     if result == expected_result
       pass = "PASS".on_green
-      puts "[#{pass}] Part #{partIdentifier} Example: #{expected_result}"
+      puts "[#{pass}] Part #{part_identifier}: #{expected_result}"
     else
       fail = "FAIL".on_red
-      puts "[#{fail}] Part #{partIdentifier} Example: expected #{expected_result}, was #{result}"
+      puts "[#{fail}] Part #{part_identifier}: expected #{expected_result}, was #{result}"
     end
   end
 
@@ -63,34 +63,46 @@ class Scenario
     name = self.class.name.gsub(/(?<=[a-z])(?=[0-9])/, ' ')
     puts "#{name}\n\n"
 
-    p1ExampleInput = grok_input(Input.read_input(@part1ExampleFile))
-    p2ExampleInput = grok_input(Input.read_input(@part2ExampleFile))
+    p1_example_input = grok_input(Input.read_input(@part1_example_file))
+    p2_example_input = grok_input(Input.read_input(@part2_example_file))
 
-    part1ExampleResult = self.part1(p1ExampleInput)
-    print_example_result(
-      "1",
-      part1ExampleResult,
-      self.part1_expected_result
+    part1_example_result = self.part1(p1_example_input)
+    print_result(
+      "1 Example",
+      part1_example_result,
+      self.part1_example_expected_result
     )
 
-    part2ExampleResult = self.part2(p2ExampleInput)
-    print_example_result(
-      "2",
-      part2ExampleResult,
-      self.part2_expected_result
+    part2_example_result = self.part2(p2_example_input)
+    print_result(
+      "2 Example",
+      part2_example_result,
+      self.part2_example_expected_result
     )
 
     puts "\n----------\n\n"
 
-    p1RealInput = grok_input(Input.read_input(@part1RealFile))
-    p2RealInput = grok_input(Input.read_input(@part2RealFile))
-    p1RealResult = self.part1(p1RealInput)
-    p2RealResult = self.part2(p2RealInput)
+    p1_real_input = grok_input(Input.read_input(@part1_real_file))
+    p2_real_input = grok_input(Input.read_input(@part2_real_file))
 
-    puts "Part 1: #{p1RealResult}"
-    puts "Part 2: #{p2RealResult}"
+    part1_real_result = self.part1(p1_real_input)
+    print_result(
+      "1",
+      part1_real_result,
+      self.part1_expected_result
+    )
 
-    if part1ExampleResult != self.part1_expected_result || part2ExampleResult != self.part2_expected_result
+    part2_real_result = self.part2(p2_real_input)
+    print_result(
+      "2",
+      part2_real_result,
+      self.part2_expected_result
+    )
+
+    if part1_example_result != self.part1_example_expected_result ||
+      part2_example_result != self.part2_example_expected_result ||
+      part1_real_result != self.part1_expected_result ||
+      part2_real_result != self.part2_expected_result
       exit 1
     end
   end
@@ -99,7 +111,15 @@ class Scenario
     raise NotImplementedError
   end
 
+  def self.part1_example_expected_result
+    raise NotImplementedError
+  end
+
   def self.part1_expected_result
+    raise NotImplementedError
+  end
+
+  def self.part2_example_expected_result
     raise NotImplementedError
   end
 

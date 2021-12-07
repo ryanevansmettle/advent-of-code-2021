@@ -48,16 +48,24 @@ class Day06 < Scenario
     simulate_growth(input_to_population_map(input), 80)
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     5934
+  end
+
+  def part1_expected_result
+    380243
   end
 
   def part2 (input)
     simulate_growth(input_to_population_map(input), 256)
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     26984457539
+  end
+
+  def part2_expected_result
+    1708791884591
   end
 
 end

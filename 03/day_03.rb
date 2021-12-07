@@ -109,16 +109,24 @@ class Day03 < Scenario
     gamma_str.to_i(2) * epsilon_str.to_i(2)
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     198
+  end
+
+  def part1_expected_result
+    3009600
   end
 
   def part2 (input)
     ogr(input).to_i(2) * c02(input).to_i(2)
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     230
+  end
+
+  def part2_expected_result
+    6940518
   end
 
 end

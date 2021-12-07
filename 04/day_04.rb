@@ -111,8 +111,12 @@ class Day04 < Scenario
     end
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     4512
+  end
+
+  def part1_expected_result
+    82440
   end
 
   def part2 (input)
@@ -139,8 +143,12 @@ class Day04 < Scenario
     end
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     1924
+  end
+
+  def part2_expected_result
+    20774
   end
 
 end

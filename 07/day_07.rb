@@ -38,8 +38,12 @@ class Day07 < Scenario
     calculate_total_fuel_spend(input, target, -> (cost) { cost })
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     37
+  end
+
+  def part1_expected_result
+    328187
   end
 
   # @param [Array<Integer>] input
@@ -49,8 +53,12 @@ class Day07 < Scenario
       .min
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     168
+  end
+
+  def part2_expected_result
+    91257582
   end
 
 end

@@ -20,8 +20,12 @@ class Day01 < Scenario
     sequential_increases(input).size
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     7
+  end
+
+  def part1_expected_result
+    1292
   end
 
   # @param [Array] input
@@ -30,8 +34,12 @@ class Day01 < Scenario
     sequential_increases(window_sums).size
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     5
+  end
+
+  def part2_expected_result
+    1262
   end
 
 end

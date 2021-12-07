@@ -57,8 +57,12 @@ class Day05 < Scenario
     points.flatten(1).tally.filter { |_, c| c >= 2 }.count
   end
 
-  def part1_expected_result
+  def part1_example_expected_result
     5
+  end
+
+  def part1_expected_result
+    5197
   end
 
   # @param [Array] input
@@ -68,8 +72,12 @@ class Day05 < Scenario
     points.flatten(1).tally.filter { |_, c| c >= 2 }.count
   end
 
-  def part2_expected_result
+  def part2_example_expected_result
     12
+  end
+
+  def part2_expected_result
+    18605
   end
 
 end
