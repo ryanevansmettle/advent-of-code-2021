@@ -23,7 +23,7 @@ class Day05 < Scenario
     end
   end
 
-  # @param [Array<Array<Numeric>>] input
+  # @param [Array<Array<Numeric>>] pair
   def walk_line(pair)
     p1 = pair[0]
     p2 = pair[1]

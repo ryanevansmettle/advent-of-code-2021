@@ -12,7 +12,7 @@ class Day04 < Scenario
   def parse_boards (input)
     boards = []
     current_board = []
-    for i in 1..input.size - 1
+    (1..input.size - 1).each { |i|
       l = input[i]
       if l == ""
         boards << current_board
@@ -21,74 +21,74 @@ class Day04 < Scenario
       end
 
       current_board << l.split.map { |n| n.to_i }
-    end
+    }
     boards << current_board
     boards.filter { |b| b.size > 0 }
   end
 
   def exists_on_board(boards, n)
-    for board in boards
-      for line in board.each
+    boards.each { |board|
+      board.each.each { |line|
         if line.include? n
           return true
         end
-      end
-    end
+      }
+    }
     false
   end
 
   def is_bingo(boards)
-    for board in boards
-      for line in board.each
+    boards.each { |board|
+      board.each.each { |line|
         if line.filter { |l| l != :marked }.count == 0
           return true
         end
-      end
-      for ci in 0..board[0].size - 1
+      }
+      (0..board[0].size - 1).each { |ci|
         column = board.each.map { |l| l[ci] }
         if column.filter { |l| l != :marked }.count == 0
           return true
         end
-      end
-    end
+      }
+    }
     false
   end
 
   def remove_from_board(boards, n)
-    for board in boards
-      for line in board.each
+    boards.each { |board|
+      board.each.each { |line|
         if line.include? n
           line[line.index(n)] = :marked
         end
-      end
-    end
+      }
+    }
   end
 
   def count_left_on_board(board)
     sum = 0
-    for line in board.each
+    board.each.each { |line|
       sum += line.filter { |n| n != :marked }.sum
-    end
+    }
     sum
   end
 
   def get_winning_boards(boards)
     won_boards = []
-    for board in boards
-      for line in board.each
+    boards.each { |board|
+      board.each.each { |line|
         if line.filter { |n| n != :marked }.size == 0
           won_boards << board
           break
         end
-      end
-      for ci in 0..board[0].size - 1
+      }
+      (0..board[0].size - 1).each { |ci|
         column = board.each.map { |l| l[ci] }
         if column.filter { |l| l != :marked }.count == 0
           won_boards << board
           break
         end
-      end
-    end
+      }
+    }
     won_boards
   end
 
@@ -97,7 +97,7 @@ class Day04 < Scenario
 
     boards = parse_boards(input)
     marked = []
-    for n in numbers
+    numbers.each { |n|
       boards.grep(n)
       if exists_on_board(boards, n)
         marked << n
@@ -108,7 +108,7 @@ class Day04 < Scenario
 
         return n * count_left_on_board(get_winning_boards(boards)[0])
       end
-    end
+    }
   end
 
   def part1_example_expected_result
@@ -124,7 +124,7 @@ class Day04 < Scenario
 
     boards = parse_boards(input)
     marked = []
-    for n in numbers
+    numbers.each { |n|
       boards.grep(n)
       if exists_on_board(boards, n)
         marked << n
@@ -133,14 +133,14 @@ class Day04 < Scenario
 
       if is_bingo(boards)
         winning_boards = get_winning_boards(boards)
-        for w in winning_boards
+        winning_boards.each { |w|
           boards.delete(w)
-        end
+        }
         if boards.size == 0
           return n * count_left_on_board(winning_boards[0])
         end
       end
-    end
+    }
   end
 
   def part2_example_expected_result
