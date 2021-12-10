@@ -37,6 +37,20 @@ module Grok
   end
 end
 
+module Maths
+
+  # @param [Array<Integer>] values
+  # @return [Integer]
+  def self.median(values)
+    sorted = values.sort
+    mid = values.length / 2
+    values.length.even? ?
+      sorted[mid - 1, 2].sum / 2
+      : sorted[mid]
+  end
+
+end
+
 class Scenario
 
   def initialize

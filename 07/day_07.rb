@@ -10,16 +10,6 @@ class Day07 < Scenario
   end
 
   # @param [Array<Integer>] positions
-  # @return Integer
-  def median(positions)
-    sorted = positions.sort
-    mid = positions.length / 2
-    positions.length.even? ?
-      sorted[mid - 1, 2].sum / 2
-      : sorted[mid]
-  end
-
-  # @param [Array<Integer>] positions
   # @param [Integer] target
   # @param [Proc] cost_function
   # @return Integer
@@ -34,7 +24,7 @@ class Day07 < Scenario
 
   # @param [Array<Integer>] input
   def part1 (input)
-    target = median(input)
+    target = Maths.median(input)
     calculate_total_fuel_spend(input, target, -> (cost) { cost })
   end
 
