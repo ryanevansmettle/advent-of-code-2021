@@ -2,12 +2,20 @@ GEM
   remote: https://rubygems.org/
   specs:
     colorize (0.8.1)
+    generator (0.0.1)
+    lazy_priority_queue (0.1.1)
+    rgl (0.5.7)
+      lazy_priority_queue (~> 0.1.0)
+      stream (~> 0.5.3)
+    stream (0.5.3)
+      generator
 
 PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
   colorize
+  rgl
 
 BUNDLED WITH
    2.2.32
