@@ -33,9 +33,11 @@ class Day20 < Scenario
     [alg, grid]
   end
 
+  # @param [Integer] x
+  # @param [Integer] y
+  # @return [Array]
   def surrounding_points(x, y)
     [
-
       [x - 1, y - 1],
       [x, y - 1],
       [x + 1, y - 1],
@@ -47,7 +49,6 @@ class Day20 < Scenario
       [x - 1, y + 1],
       [x, y + 1],
       [x + 1, y + 1],
-
     ]
   end
 
@@ -68,6 +69,7 @@ class Day20 < Scenario
     str
   end
 
+  # @param [Hash<Array -> String>] grid
   def print_image(grid)
     str = "\n\n"
     min_x = grid.keys.map { |x, _| x }.min
@@ -87,12 +89,14 @@ class Day20 < Scenario
       str << "\n"
     }
     puts str
-    str
   end
 
+  # @param [Hash<Array -> String>] grid
+  # @param [String] alg
+  # @param [Integer] step
+  # @return [Hash<Array<Integer> -> String>]
   def enhance(grid, alg, step)
     output = {}
-
     buf = 1
 
     min_x = grid.keys.map { |x, _| x }.min
@@ -103,11 +107,10 @@ class Day20 < Scenario
       ((min_x - buf)..(max_x + buf)).each { |x|
         default = step % 2 == 0 && alg[0] == "#" ? "#" : "."
 
-        str = get_neighbours_string(x, y, grid, default)
-        val = str.gsub(/\./, "0").gsub(/#/, "1").to_i(2)
-        col = alg[val]
+        val = get_neighbours_string(x, y, grid, default).gsub(/\./, "0").gsub(/#/, "1").to_i(2)
+        pixel = alg[val]
 
-        output[[x, y]] = col
+        output[[x, y]] = pixel
       }
     }
 
